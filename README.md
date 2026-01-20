@@ -200,7 +200,7 @@ This configuration separates user control from the Diretta Host.
 │   │        ▼        │     │        ▼        │     │        ▼        │       │
 │   │  Tablet/        │     │  ┌───────────┐  │     │    ┌───────┐    │       │
 │   │  Smartphone     │     │  │ Diretta   │  │     │    │  DAC  │    │       │
-│   │  (BubbleUPnP,   │     │  │ ALSA Host │═══════════  └───────┘    │       │
+│   │  (BubbleUPnP,   │     │  │ ALSA Host │═══════>|    └───────┘    │       │
 │   │   Kazoo)        │     │  │           │  │ IPv6│                 │       │
 │   └─────────────────┘     │  └───────────┘  │     └─────────────────┘       │
 │                           │                 │                               │
