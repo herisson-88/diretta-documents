@@ -467,6 +467,11 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 
 ---
 
+## Price
+
+Diretta is licensed software, Diretta is not free, see https://www.diretta.link, contact Diretta or his partners.
+The extraordinary quality of the development and the improvement in sound comes at a cost; nevertheless, the increase in quality is exceptional given the very reasonable price of the investment.
+
 ## Compatible Hardware
 
 ### Commercial Targets
@@ -475,8 +480,10 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 
 ### DIY Targets
 
-- Raspberry Pi 4/5 with GentooPlayer/AudioLinux
-- x86 NUC with GentooPlayer/AudioLinux
+With partners like Audiolinux or Gentooplayer or with Diretta firmware (https://www.diretta.link)
+
+- Raspberry Pi 4/5
+- x86 NUC
 - Ian Canada boards
 
 ### Sound Quality
