@@ -483,6 +483,7 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 ### Commercial Targets & Hosts
 
 - See the website https://www.diretta.link
+- In particular in Diretta Shop : DDC-0, DDC-00, DDR-RP, DDT-PC from Yu Harada
 
 ### DIY Targets & Hosts
 
