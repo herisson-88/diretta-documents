@@ -60,12 +60,14 @@ Packets are transmitted as frequently as possible at short, constant intervals t
 - No multi-device synchronization like AES67
 
 ### Diretta DDS (Diretta Direct Stream): The Non-IPv6 Mode
+
 Diretta DDS represents a major evolution of the protocol by completely eliminating the IP layer from audio transmission. Unlike the standard mode that uses IPv6 Link-Local and Multicast, DDS operates directly at the Ethernet level (Layer 2) via a dedicated EtherType (0x88B6). The initial connection is briefly established on UDP port 19642 for authentication, then the audio stream switches to raw Ethernet transmission, without any IP encapsulation. This approach offers several decisive advantages: complete elimination of the IP/TCP/UDP stack drastically reduces latency and CPU processing, audio data is aligned on 64-bit boundaries for maximum efficiency, and a dedicated Linux driver enables exclusive handling of communications. DDS mode pushes the Diretta philosophy to its peak by removing all superfluous protocol layers between the Host and Target
 
 ## Price
 
 Diretta is licensed software, Diretta is not free, see https://www.diretta.link, contact Diretta or his partners.
 The extraordinary quality of the development and the improvement in sound comes at a cost; nevertheless, the increase in quality is exceptional given the very reasonable price of the investment.
+
 ---
 
 ## Basic Architecture: Host + Target
