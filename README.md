@@ -477,7 +477,7 @@ The extraordinary quality of the development and the improvement in sound comes 
 
 ## Compatible Hardware
 
-### Commercial Targets
+### Commercial Targets (& Hosts)
 
 - See the website https://www.diretta.link
 
