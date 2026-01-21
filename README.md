@@ -70,6 +70,8 @@ The extraordinary quality of the development and the improvement in sound comes 
 
 ---
 
+Note : for simplicity I use USB DAC in schema, or course Diretta offers I2S implementations see (https://www.diretta.link shop for official ones DDC-00, DDC-0 with firmware Diretta, you can also use solution like Holo Red, Magna Mano, Ian Canada with Linux parters etc...)
+
 ## Basic Architecture: Host + Target
 
 ```
@@ -489,6 +491,10 @@ With partners like Audiolinux or Gentooplayer or with Diretta firmware (https://
 - Raspberry Pi 4/5
 - x64 NUC or PC
 - Ian Canada boards
+- Holo Red
+- Magna Mano
+- C19
+- etc...
 
 ### Sound Quality
 
