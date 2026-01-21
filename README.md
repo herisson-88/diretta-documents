@@ -1,7 +1,7 @@
 
 ## The purpose of this document is to present Diretta, its implementations, and in particular the latest one: the Diretta UPnP renderer
 
-### Diretta is proprietary licensed software by Yu Harada. The Diretta UPnP Renderer is an open‑source Host implementation built using the Diretta Host SDK, which is also owned by Yu Harada.
+### Diretta is proprietary licensed software by Yu Harada. The Diretta UPnP Renderer is an open‑source Host implementation from Dom built using the Diretta Host SDK, which is also owned by Yu Harada.
 
 ### https://www.diretta.link
 ### https://github.com/cometdom/DirettaRendererUPnP
