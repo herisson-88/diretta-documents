@@ -499,6 +499,8 @@ With partners like Audiolinux or Gentooplayer or with Diretta firmware (https://
 
 ### Sound Quality
 
+In terms of SQ officials Diretta Target firmware developped by Yu are on the top (for his product, or partners, or RPI/x64)
+
 In terms of sound quality, the different Diretta implementations are not equivalent. The Diretta Renderer UPnP with integrated Host SDK configuration offers very good results in terms of sound quality. Like Memory Play, the UPnP Renderer completely bypasses the ALSA system layer for direct hardware access, but it goes even further: it combines this complete bypass with streaming compatibility and online services (Roon via Squeeze Bridge, JPlay, MConnect). This solution combines the advantages of the shortest audio path with modern usage flexibility.
 
 ---
