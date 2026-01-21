@@ -59,6 +59,13 @@ Packets are transmitted as frequently as possible at short, constant intervals t
 - No complex processing like UPnP file range requests
 - No multi-device synchronization like AES67
 
+### Diretta DDS (Diretta Direct Stream): The Non-IPv6 Mode
+Diretta DDS represents a major evolution of the protocol by completely eliminating the IP layer from audio transmission. Unlike the standard mode that uses IPv6 Link-Local and Multicast, DDS operates directly at the Ethernet level (Layer 2) via a dedicated EtherType (0x88B6). The initial connection is briefly established on UDP port 19642 for authentication, then the audio stream switches to raw Ethernet transmission, without any IP encapsulation. This approach offers several decisive advantages: complete elimination of the IP/TCP/UDP stack drastically reduces latency and CPU processing, audio data is aligned on 64-bit boundaries for maximum efficiency, and a dedicated Linux driver enables exclusive handling of communications. DDS mode pushes the Diretta philosophy to its peak by removing all superfluous protocol layers between the Host and Target
+
+## Price
+
+Diretta is licensed software, Diretta is not free, see https://www.diretta.link, contact Diretta or his partners.
+The extraordinary quality of the development and the improvement in sound comes at a cost; nevertheless, the increase in quality is exceptional given the very reasonable price of the investment.
 ---
 
 ## Basic Architecture: Host + Target
@@ -79,7 +86,7 @@ Packets are transmitted as frequently as possible at short, constant intervals t
 │    │  └────────┬─────────┘    │         │  └────────┬─────────┘    │        │
 │    │           │              │         │           │              │        │
 │    │           ▼              │         │           ▼              │        │
-│    │  ┌──────────────────┐    │         │  ┌──────────────────┐    │        │
+│    │  ┌──────────────────┐    │  DDS or │  ┌──────────────────┐    │        │
 │    │  │  Diretta Driver  │    │  IPv6   │  │   USB Audio      │    │        │
 │    │  │  (ASIO or ALSA)  │────┼─────────┼──│   Driver         │    │        │
 │    │  │                  │    │ Ethernet│  │                  │    │        │
@@ -121,7 +128,7 @@ Packets are transmitted as frequently as possible at short, constant intervals t
 │    │  ┌───────────────┐  │   Diretta   │  ┌───────────────┐  │              │
 │    │  │ ASIO Driver   │  │   Protocol  │  │ Diretta Recv  │  │              │
 │    │  │ Diretta       │═══════════════>│  │               │  │              │
-│    │  │               │  │    IPv6     │  │               │  │              │
+│    │  │               │  │ DDS or IPv6 │  │               │  │              │
 │    │  └───────────────┘  │   Ethernet  │  └───────┬───────┘  │              │
 │    │                     │             │          │ USB      │              │
 │    │  Win 10/11          │             │          ▼          │              │
@@ -163,7 +170,7 @@ Packets are transmitted as frequently as possible at short, constant intervals t
 │    │  ┌───────────────┐  │   Diretta   │      ┌───────┐      │              │
 │    │  │ ALSA Driver   │  │   Protocol  │      │  DAC  │      │              │
 │    │  │ Diretta       │═══════════════>│      └───────┘      │              │
-│    │  │               │  │    IPv6     │                     │              │
+│    │  │               │  │ DDS or IPv6 │                     │              │
 │    │  └───────────────┘  │   Ethernet  └─────────────────────┘              │
 │    │                     │                                                  │
 │    │  AudioLinux         │                                                  │
@@ -202,8 +209,8 @@ This configuration separates user control from the Diretta Host.
 │   │  Smartphone     │     │  │ Diretta   │  │     │    │  DAC  │    │       │
 │   │  (BubbleUPnP,   │     │  │ ALSA Host │═══════>|    └───────┘    │       │
 │   │   Kazoo)        │     │  │           │  │ IPv6│                 │       │
-│   └─────────────────┘     │  └───────────┘  │     └─────────────────┘       │
-│                           │                 │                               │
+│   └─────────────────┘     │  └───────────┘  │ or  └─────────────────┘       │
+│                           │                 │ DDS                           │
 │   Standard LAN Network    │  Dedicated Linux│     Close to DAC              │
 │                           └─────────────────┘                               │
 │                                                                             │
@@ -231,8 +238,8 @@ This configuration separates user control from the Diretta Host.
 │   │        │        │     │  ┌───────────┐  │     │    ┌───────┐    │       │
 │   │        └────────┼────>│  │ Diretta   │═══════>│    │  DAC  │    │       │
 │   │                 │     │  │ ALSA Host │  │ IPv6│    └───────┘    │       │
-│   │  NAS/Server     │     │  └───────────┘  │     │                 │       │
-│   └─────────────────┘     └─────────────────┘     └─────────────────┘       │
+│   │  NAS/Server     │     │  └───────────┘  │ or  │                 │       │
+│   └─────────────────┘     └─────────────────┘ DDS └─────────────────┘       │
 │                                                                             │
 │   The Roon Bridge sees the Target as a local sound card (ALSA Diretta)      │
 │                                                                             │
@@ -298,8 +305,8 @@ The DPDKMemoryPlay system (based on DPDK - Data Plane Development Kit) is a prop
 │   │ MemoryPlay    │   Network │  Linux DPDK   │ Diretta │  Diretta      │   │
 │   │ Controller    │══════════>│  embedded    ══════════>│  Target       │   │
 │   │ GUI           │   (Config)│               │  IPv6   │               │   │
-│   │               │           │  Files        │         │               │   │
-│   │ • File        │           │  in RAM       │         └───────┬───────┘   │
+│   │               │           │  Files        │  or     │               │   │
+│   │ • File        │           │  in RAM       │  DDS    └───────┬───────┘   │
 │   │   selection   │           │               │                 │ USB       │
 │   │ • Playback    │           │  No standard  │                 ▼           │
 │   │   control     │           │  OS           │             ┌───────┐       │
@@ -345,7 +352,7 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 │                              │          ▼          │                        │
 │                              │  ┌───────────────┐  │  Diretta               │
 │                              │  │ DIRETTA SDK   │═>│                        │
-│                              │  │ HOST          │  │  IPv6                  │
+│                              │  │ HOST          │  │  IPv6 or DDS           │
 │                              │  │ (Integrated)  │  │  Smoothed              │
 │                              │  └───────────────┘  │                        │
 │                              │                     │                        │
@@ -466,14 +473,6 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 ```
 
 ---
-
-### Diretta DDS (Diretta Direct Stream): The Non-IPv6 Mode
-Diretta DDS represents a major evolution of the protocol by completely eliminating the IP layer from audio transmission. Unlike the standard mode that uses IPv6 Link-Local and Multicast, DDS operates directly at the Ethernet level (Layer 2) via a dedicated EtherType (0x88B6). The initial connection is briefly established on UDP port 19642 for authentication, then the audio stream switches to raw Ethernet transmission, without any IP encapsulation. This approach offers several decisive advantages: complete elimination of the IP/TCP/UDP stack drastically reduces latency and CPU processing, audio data is aligned on 64-bit boundaries for maximum efficiency, and a dedicated Linux driver enables exclusive handling of communications. DDS mode pushes the Diretta philosophy to its peak by removing all superfluous protocol layers between the Host and Target
-
-## Price
-
-Diretta is licensed software, Diretta is not free, see https://www.diretta.link, contact Diretta or his partners.
-The extraordinary quality of the development and the improvement in sound comes at a cost; nevertheless, the increase in quality is exceptional given the very reasonable price of the investment.
 
 ## Compatible Hardware
 
