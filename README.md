@@ -486,7 +486,7 @@ The extraordinary quality of the development and the improvement in sound comes 
 With partners like Audiolinux or Gentooplayer or with Diretta firmware (https://www.diretta.link)
 
 - Raspberry Pi 4/5
-- x86 NUC
+- x64 NUC or PC
 - Ian Canada boards
 
 ### Sound Quality
