@@ -477,11 +477,11 @@ The extraordinary quality of the development and the improvement in sound comes 
 
 ## Compatible Hardware
 
-### Commercial Targets (& Hosts)
+### Commercial Targets & Hosts
 
 - See the website https://www.diretta.link
 
-### DIY Targets
+### DIY Targets & Hosts
 
 With partners like Audiolinux or Gentooplayer or with Diretta firmware (https://www.diretta.link)
 
