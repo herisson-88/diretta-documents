@@ -369,7 +369,7 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## LMS/Roon Integration via slim2Diretta
+## LMS/Roon Integration via slim2Diretta: Integrated Host SDK
 
 ```
 +--------------------------------------------------------+
@@ -442,12 +442,13 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 │                                                                             │
 │    ─────────────────────────────────────────────────────────────────────    │
 │                                                                             │
-│    DIRETTA RENDERER UPnP SOLUTION (Integrated SDK)                          │
+│    DIRETTA RENDERER UPnP/Slim2diretta SOLUTIONS (Integrated SDK)                          │
 │    ═══════════════════════════════════════════════                          │
 │                                                                             │
 │    ┌─────────────────────────────────────┐              ┌────────┐          │
-│    │  Diretta Renderer UPnP              │   Diretta    │ Target │          │
-│    │  (UPnP + Decode + Host SDK)         │─────────────>│        │          │
+│    │  Diretta Renderer UPnP              │   Diretta    │ Target │          |
+|    |    or slim2Diretta                  │              |        |          |
+│    │ (UPnP/slimProto + Decode + Host SDK)│─────────────>│        │          │
 │    └─────────────────────────────────────┘              └────────┘          │
 │                                                                             │
 │    2 components = Simplified architecture, direct flow control              │
@@ -490,8 +491,8 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 │  (PIC)         │            │ Bypass     │ (files only)     │              │
 │  ───────────────────────────────────────────────────────────────────────── │
 │                │            │            │ JPlay, MConnect  │              │             
-│  Renderer UPnP │ Linux      │ Integrated │ Roon (via        │ ***          │
-│  (Integrated   │            │ Host SDK   │ Squeeze Bridge)  │              │
+│  Renderer UPnP │ Linux      │ Integrated │ Audirvana....    │ ***          │
+│  (Integrated   │            │ Host SDK   │                  │              │
 │   SDK)         │            │            │                  │              │
 └────────────────────────────────────────────────────────────────────────────┘
 │                │            │            │ LMS              │              │             
