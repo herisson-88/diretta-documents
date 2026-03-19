@@ -369,38 +369,58 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Roon Integration via Squeeze Bridge UPnP
+### Roon Integration via slim2Diretta
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│              ROON + SQUEEZE BRIDGE UPnP + DIRETTA RENDERER                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│   ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────┐  │
-│   │              │    │              │    │              │    │          │  │
-│   │    ROON      │    │   SQUEEZE    │    │   DIRETTA    │    │ DIRETTA  │  │
-│   │    CORE      │───>│   BRIDGE     │───>│   RENDERER   │───>│ TARGET   │  │
-│   │              │    │   UPnP       │    │   UPnP       │    │          │  │
-│   │              │    │              │    │              │    │          │  │
-│   └──────────────┘    └──────────────┘    └──────────────┘    └────┬─────┘  │
-│                                                                    │ USB    │
-│        RAAT             Squeezebox            Diretta              ▼        │
-│      Protocol            → UPnP              Protocol          ┌───────┐    │
-│                                                                │  DAC  │    │
-│                                                                └───────┘    │
-│                                                                             │
-│   • Roon sees the renderer as a Squeezebox endpoint                         │
-│   • Squeeze Bridge translates the protocol to UPnP/OpenHome                 │
-│   • The Diretta Renderer decodes and transmits via Host SDK                 │
-│   • The Target receives an optimized smoothed stream                        │
-│                                                                             │
-│   Advantages:                                                               │
-│   ─────────────                                                             │
-│   • Complete Roon interface (DSP, library, metadata)                        │
-│   • Optimized Diretta transmission to the Target                            │
-│   • Unified architecture for UPnP and Roon                                  │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
++--------------------------------------------------------+
+|  Lyrion Music Server or Roon in Squeezebox mode        |  
++-------------+------------------------------------------+
+              |
+              | Slimproto (TCP 3483)
+              | + HTTP Streaming (TCP 9000)
+              v
++-------------------------------------------------------------+
+|  slim2diretta (single process)                              |
+|                                                             |
+|  +------------------+        +---------------------------+  |
+|  | SlimprotoClient  |        |      DirettaSync v2.0     |  |
+|  | (TCP control)    |        |                           |  |
+|  +--------+---------+        |  - Format negotiation     |  |
+|           |                  |  - DSD conversions        |  |
+|  +--------+---------+        |  - SIMD optimizations     |  |
+|  | HttpStreamClient |        |  - Lock-free ring buffer  |  |
+|  | (HTTP audio)     |        +-------------+-------------+  |
+|  +--------+---------+                      |                |
+|           |                                |                |
+|  +--------+---------+                      |                |
+|  | Decoder           |                     |                |
+|  | - FLAC (libFLAC)  +--------------------+                 |
+|  | - MP3 (libmpg123) |                                      |
+|  | - AAC (fdk-aac)   |                                      |
+|  | - OGG (libvorbis) |                                      |
+|  | - PCM/WAV/AIFF    |                                      |
+|  | - DSD (DSF/DFF)   |                                      |
+|  | - DoP detection   |                                      |
+|  |                   |                                      |
+|  | FFmpeg backend:   |                                      |
+|  | - --decoder ffmpeg|                                      |
+|  | - libavcodec      |                                      |
+|  +-------------------+                                      |
++--------------------------------------------+----------------+
+                                             |
+                        Diretta Protocol (UDP/Ethernet)
+                                             |
+                                             v
+                         +-------------------+-------------------+
+                         |           Diretta TARGET              |
+                         |     Audiolinux, GentooPlayer,         |
+                         |      DDC-0/DDC-00 etc...              |
+                         +-------------------+-------------------+
+                                             |
+                                             v
+                                    +--------+--------+
+                                    |       DAC       |
+                                    +-----------------+
 ```
 
 ### Architecture Comparison
@@ -472,6 +492,11 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 │                │            │            │ JPlay, MConnect  │              │             
 │  Renderer UPnP │ Linux      │ Integrated │ Roon (via        │ ***          │
 │  (Integrated   │            │ Host SDK   │ Squeeze Bridge)  │              │
+│   SDK)         │            │            │                  │              │
+└────────────────────────────────────────────────────────────────────────────┘
+│                │            │            │ LMS              │              │             
+│  Slim2diretta  │ Linux      │ Integrated │ Roon             │ ***          │
+│  (Integrated   │            │ Host SDK   │                  │              |
 │   SDK)         │            │            │                  │              │
 └────────────────────────────────────────────────────────────────────────────┘
 ```
