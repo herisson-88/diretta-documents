@@ -369,7 +369,7 @@ The Diretta Renderer UPnP integrates the Host SDK directly into a UPnP renderer,
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Roon Integration via slim2Diretta
+## LMS/Roon Integration via slim2Diretta
 
 ```
 +--------------------------------------------------------+
