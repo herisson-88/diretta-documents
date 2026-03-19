@@ -527,7 +527,7 @@ With partners like Audiolinux or Gentooplayer or with Diretta firmware (https://
 
 From a sound-quality perspective, the official Diretta Target firmware developed by Yu represents a reference. The official Diretta hardware is also built upon Yu’s deep technical expertise.
 
-In terms of sound quality, the different Diretta implementations are not equivalent. The Diretta Renderer UPnP with integrated Host SDK configuration offers very good results in terms of sound quality. Like Memory Play, the UPnP Renderer completely bypasses the ALSA system layer for direct hardware access, but it goes even further: it combines this complete bypass with streaming compatibility and online services (Roon via Squeeze Bridge, JPlay, MConnect). This solution combines the advantages of the shortest audio path with modern usage flexibility.
+In terms of sound quality, the different Diretta implementations are not equivalent. The Diretta Renderer UPnP or slim2Diretta with integrated Host SDK configuration offers very good results in terms of sound quality. Like Memory Play, the UPnP Renderer or slim2Diretta completely bypasses the ALSA system layer for direct hardware access, but it goes even further: it combines this complete bypass with streaming compatibility and online services (Roon, LMS, Audirvana, JPlay, MConnect). This solution combines the advantages of the shortest audio path with modern usage flexibility.
 
 ---
 
